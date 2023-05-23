@@ -89,3 +89,25 @@ button_angle = math.radians(0)
 button_x = WIDTH/2 + RADIUS * math.cos(button_angle) 
 button_y = HEIGHT/2 - RADIUS * math.sin(button_angle) 
 button = canvas.create_oval(button_x-10, button_y-10, button_x+10, button_y+10, fill="#7300bf", width=2)
+
+# Add movement to the start button
+# امکان جابه‌جا کردن دکمه
+def on_button_press(event):
+     global prev_x, prev_y
+     prev_x, prev_y = event.x, event.y
+
+def on_button_motion(event):
+     global prev_x, prev_y
+     x, y = event.x, event.y
+     dx, dy = x - prev_x, y - prev_y
+     canvas.move(button, dx, dy)
+     prev_x, prev_y = x, y
+     update_trig(event)
+
+canvas.tag_bind(button, "<ButtonPress-1>", on_button_press)
+canvas.tag_bind(button, "<B1-Motion>", on_button_motion)
+
+#ارسال پیام به کاربر برای نحوه‌ی کارکرد برنامه
+messagebox.showinfo(title='Information Box', message='دکمه‌ی شروع (دایره‌ی بنفش رنگ) را به سمت زاویه‌ی مورد نظر بکشید')
+
+root.mainloop()
