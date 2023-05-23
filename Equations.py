@@ -93,14 +93,22 @@ def calculate_ratios():
     # Calculate the remaining ratios
     #محاسبه‌ی بقیه‌ی نسبت‌ها
     if ratio == "sine":
-        cosine = cos(asin(value))
-        tangent = tan(asin(value))
-        Cotangent = 1/tan(asin(value))
+        if value == 1 or value == -1:
+            cosine = cos(asin(value))
+            Cotangent = 1/tan(asin(value))
+        else:
+            cosine = cos(asin(value))
+            tangent = tan(asin(value))
+            Cotangent = 1/tan(asin(value))
 
     elif ratio == "cosine":
-        sine = sin(acos(value))
-        tangent = tan(acos(value))
-        Cotangent = 1/tan(acos(value))
+        if value == 1 or value == -1: 
+            sine = sin(acos(value))
+            tangent = tan(acos(value))
+        else:
+            sine = sin(acos(value))
+            tangent = tan(acos(value))
+            Cotangent = 1/tan(acos(value))
 
     elif ratio == "tangent":
         sine = sin(atan(value))
@@ -115,9 +123,15 @@ def calculate_ratios():
     # Display the results
     # نمایش جواب ها
     if ratio == "sine":
-        result_label.config(text=f"cosine: {cosine:.3f}, tangent: {tangent:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+        if value == 1 or value == -1:
+            result_label.config(text=f"cosine: {cosine:.3f}, tangent: Ꝏ, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+        else:
+            result_label.config(text=f"cosine: {cosine:.3f}, tangent: {tangent:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
     elif ratio == "cosine":
-        result_label.config(text=f"sine: {sine:.3f}, tangent: {tangent:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+        if value == 1 or value == -1:
+            result_label.config(text=f"sine: {sine:.3f}, tangent: {tangent:.3f}, Cotangent: Ꝏ", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+        else:
+            result_label.config(text=f"sine: {sine:.3f}, tangent: {tangent:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
     elif ratio == "tangent":
         result_label.config(text=f"sine: {sine:.3f}, cosine: {cosine:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
     elif ratio == "Cotangent":
