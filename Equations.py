@@ -111,3 +111,19 @@ def calculate_ratios():
         sine = cos(atan(value))
         cosine = sin(atan(value))
         tangent = (1/value)
+
+    # Display the results
+    # نمایش جواب ها
+    if ratio == "sine":
+        result_label.config(text=f"cosine: {cosine:.3f}, tangent: {tangent:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+    elif ratio == "cosine":
+        result_label.config(text=f"sine: {sine:.3f}, tangent: {tangent:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+    elif ratio == "tangent":
+        result_label.config(text=f"sine: {sine:.3f}, cosine: {cosine:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+    elif ratio == "Cotangent":
+        result_label.config(text=f"sine: {sine:.3f}, cosine: {cosine:.3f}, tangent: {tangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+
+# Create a button to calculate the ratios
+# ایجاد دکمه برای اجرای برنامه
+calculate_button = tk.Button(root, text="محاسبه", font=("B Titr", 14), command=calculate_ratios, pady=0.05, bd=3, width=8, fg="#7300bf")
+calculate_button.pack()
