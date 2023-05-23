@@ -89,3 +89,25 @@ def calculate_ratios():
     if ratio in ["sine", "cosine"] and (value > 1 or value < -1):
         result_label.config(text="خطا: مقدار ورودی باید در بازه‌ی [1, 1-] باشد", font=("B Titr", 14), pady=10, fg="#0ca2a4")
         return
+
+    # Calculate the remaining ratios
+    #محاسبه‌ی بقیه‌ی نسبت‌ها
+    if ratio == "sine":
+        cosine = cos(asin(value))
+        tangent = tan(asin(value))
+        Cotangent = 1/tan(asin(value))
+
+    elif ratio == "cosine":
+        sine = sin(acos(value))
+        tangent = tan(acos(value))
+        Cotangent = 1/tan(acos(value))
+
+    elif ratio == "tangent":
+        sine = sin(atan(value))
+        cosine = cos(atan(value))
+        Cotangent = 1/value
+
+    elif ratio == "Cotangent":
+        sine = cos(atan(value))
+        cosine = sin(atan(value))
+        tangent = (1/value)
