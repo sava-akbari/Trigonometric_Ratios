@@ -60,3 +60,32 @@ tangent_label.pack(side=tk.TOP, padx=10, pady=5)
 tangent_entry.pack(side=tk.TOP, padx=10, pady=5)
 Cotangent_label.pack(side=tk.TOP, padx=10, pady=5)
 Cotangent_entry.pack(side=tk.TOP, padx=10, pady=5)
+
+# Create a function to calculate the remaining ratios
+# ساختن تابعی برای محاسبه‌ی نسبت ها
+def calculate_ratios():
+
+    # Get the selected ratio
+    #دریافت نسبت انتخاب شده
+    ratio = ratio_var.get()
+
+    # Get the entered value
+    # دریافت مقدار وارد شده برای آن نسبت
+    try:
+        if ratio == "sine":
+            value = float(sine_entry.get())
+        elif ratio == "cosine":
+            value = float(cosine_entry.get())
+        elif ratio == "tangent":
+            value = float(tangent_entry.get())
+        elif ratio == "Cotangent":
+            value = float(Cotangent_entry.get())
+    except ValueError:
+        result_label.config(text="خطا: ورودی نامعتبر", font=("B Titr", 14), pady=5, fg="#0ca2a4")
+        return
+
+    # Check if the value is within range for sine and cosine
+    # چک کردن ورودی معتبر برای مقادیر سینوس و کسینوس
+    if ratio in ["sine", "cosine"] and (value > 1 or value < -1):
+        result_label.config(text="خطا: مقدار ورودی باید در بازه‌ی [1, 1-] باشد", font=("B Titr", 14), pady=10, fg="#0ca2a4")
+        return
