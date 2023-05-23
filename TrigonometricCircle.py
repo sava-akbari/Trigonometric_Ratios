@@ -59,3 +59,33 @@ sine_label.pack()
 cosine_label.pack()
 tangent_label.pack() 
 cotangent_label.pack()
+
+def update_trig(event): 
+     x, y = canvas.canvasx(event.x), canvas.canvasy(event.y) 
+     angle = math.atan2(HEIGHT/2 - y, x - WIDTH/2)
+     sine, cosine, tangent, cotangent = calculate_trig(angle) 
+     angle_label.config(text=f"Angle: {round(math.degrees(angle), 2)}", fg="navy") 
+     sine_label.config(text=f"Sine: {sine}", fg="#7300bf")
+     cosine_label.config(text=f"Cosine: {cosine}", fg="#7300bf") 
+     tangent_label.config(text=f"Tangent: {tangent}", fg="#7300bf") 
+     cotangent_label.config(text=f"Cotangent: {cotangent}", fg="#7300bf") 
+     if sine == 1 or sine == -1:
+      tangent_label.config(text=f"Tangent: Ꝏ", fg="#7300bf")
+     elif tangent == 0.0 or tangent == -0.0:
+          tangent_label.config(text=f"Tangent: 0.0", fg="#7300bf")
+     else:
+        tangent_label.config(text=f"Tangent: {tangent}", fg="#7300bf")
+        cotangent_label.config(text=f"Cotangent: {cotangent}", fg="#7300bf")
+
+     if cotangent == 0.0 or cotangent == -0.0:
+            cotangent_label.config(text=f"Cotangent: 0.0", fg="#7300bf") 
+     else:
+          cotangent_label.config(text=f"Cotangent: {cotangent}", fg="#7300bf")
+    
+
+# Create a button to select the angle
+# ایجاد یک دکمه برای انتخاب زاویه
+button_angle = math.radians(0) 
+button_x = WIDTH/2 + RADIUS * math.cos(button_angle) 
+button_y = HEIGHT/2 - RADIUS * math.sin(button_angle) 
+button = canvas.create_oval(button_x-10, button_y-10, button_x+10, button_y+10, fill="#7300bf", width=2)
