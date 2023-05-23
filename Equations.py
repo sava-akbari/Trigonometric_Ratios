@@ -127,3 +127,57 @@ def calculate_ratios():
 # ایجاد دکمه برای اجرای برنامه
 calculate_button = tk.Button(root, text="محاسبه", font=("B Titr", 14), command=calculate_ratios, pady=0.05, bd=3, width=8, fg="#7300bf")
 calculate_button.pack()
+
+# Create a label for the results
+# ایجاد فضابرای نمایش جواب
+result_label = tk.Label(root, text="")
+result_label.pack()
+
+# Pack the entry fields
+sine_entry.pack()
+cosine_entry.pack()
+tangent_entry.pack()
+
+# Hide the entry fields that are not currently selected
+# پنهان کردن ورودی‌هایی که نسبت مربوط به آن انتخاب نشده است
+def hide_entries():
+    if ratio_var.get() == "sine":
+        sine_entry.pack()
+        cosine_entry.pack_forget()
+        tangent_entry.pack_forget()
+        Cotangent_entry.pack_forget()
+        cosine_label.pack_forget()
+        tangent_label.pack_forget()
+        Cotangent_label.pack_forget()
+
+    elif ratio_var.get() == "cosine":
+        sine_entry.pack_forget()
+        cosine_entry.pack()
+        tangent_entry.pack_forget()
+        Cotangent_entry.pack_forget()
+        sine_label.pack_forget()
+        tangent_label.pack_forget()
+        Cotangent_label.pack_forget()
+
+    elif ratio_var.get() == "tangent":
+        sine_entry.pack_forget()
+        cosine_entry.pack_forget()
+        Cotangent_entry.pack_forget()
+        tangent_entry.pack()
+        sine_label.pack_forget()
+        cosine_label.pack_forget()
+        Cotangent_label.pack_forget()
+
+    elif ratio_var.get() == "Cotangent":
+        sine_entry.pack_forget()
+        cosine_entry.pack_forget()
+        tangent_entry.pack_forget()
+        Cotangent_entry.pack()
+        sine_label.pack_forget()
+        cosine_label.pack_forget()
+        tangent_label.pack_forget()
+
+ratio_var.trace("w", lambda *args: hide_entries())
+
+# Start the main loop
+root.mainloop()
