@@ -35,3 +35,28 @@ rb_tangent.pack(side=tk.RIGHT)
 
 rb_tangent = Radiobutton(ratio_frame, text="Cotangent", variable=ratio_var, value="Cotangent", padx=35, pady=3, font=("Arial Rounded MT Bold", 14), fg="#7300bf")
 rb_tangent.pack(side=tk.RIGHT)
+
+# Create entry fields for the ratios
+# ایجاد ورودی مربوط به هر زاویه‌ی مثلثاتی
+sine_entry = tk.Entry(root, font=("Arial Rounded MT Bold", 11), bd=3, bg="#c0ecbf")
+cosine_entry = tk.Entry(root, font=("Arial Rounded MT Bold", 11), bd=3, bg="#c0ecbf")
+tangent_entry = tk.Entry(root, font=("Arial Rounded MT Bold", 11), bd=3, bg="#c0ecbf")
+Cotangent_entry = tk.Entry(root, font=("Arial Rounded MT Bold", 11), bd=3, bg="#c0ecbf")
+
+# Create labels for the entry fields
+# ایجاد عنوان برای هر ورودی 
+sine_label = tk.Label(root, text="sine:", font=("Arial Rounded MT Bold", 14), fg ="navy")
+cosine_label = tk.Label(root, text="cosine:", font=("Arial Rounded MT Bold", 14), fg ="navy")
+tangent_label = tk.Label(root, text="tangent:", font=("Arial Rounded MT Bold", 14), fg ="navy")
+Cotangent_label = tk.Label(root, text="Cotangent:", font=("Arial Rounded MT Bold", 14), fg ="navy")
+
+# Set the positions of the labels and entry fields using pack
+#مشخص کردن مکان قرار گیری ورودی و عنوان مربوط به آن 
+sine_label.pack(side=tk.TOP, padx=10, pady=5)
+sine_entry.pack(side=tk.TOP, padx=10, pady=5)
+cosine_label.pack(side=tk.TOP, padx=10, pady=5)
+cosine_entry.pack(side=tk.TOP, padx=10, pady=5)
+tangent_label.pack(side=tk.TOP, padx=10, pady=5)
+tangent_entry.pack(side=tk.TOP, padx=10, pady=5)
+Cotangent_label.pack(side=tk.TOP, padx=10, pady=5)
+Cotangent_entry.pack(side=tk.TOP, padx=10, pady=5)
