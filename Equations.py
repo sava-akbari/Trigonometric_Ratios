@@ -6,7 +6,7 @@ from math import sin, cos, tan, asin, acos, atan, radians
 # Define constants  
 #تعریف مقادیر ثابت
 WIDTH = 450 
-HEIGHT = 20
+HEIGHT = 30
 
 # Create the main window
 # ایجاد کردن پنجره‌ی اصلی 
@@ -22,7 +22,7 @@ ratio_frame = tk.Frame(root)
 ratio_frame.pack(padx=10, pady=(5,10))
 
 label = tk.Label(ratio_frame, text="نسبت مثلثاتی‌ای که دارید را انتخاب کرده و در جای خالی وارد کنید", font=("B Titr", 16), fg ="navy")
-label.pack(padx=(0,0), pady=(5, 3))
+label.pack(padx=(0,0), pady=(0, 5))
 
 rb_sine = Radiobutton(ratio_frame, text="sine", variable=ratio_var, value="sine", padx=35, pady=3, font=("Arial Rounded MT Bold", 14), fg="#7300bf")
 rb_sine.pack(side=tk.RIGHT)
@@ -33,33 +33,44 @@ rb_cosine.pack(side=tk.RIGHT)
 rb_tangent = Radiobutton(ratio_frame, text="tangent", variable=ratio_var, value="tangent", padx=35, pady=3, font=("Arial Rounded MT Bold", 14), fg="#7300bf")
 rb_tangent.pack(side=tk.RIGHT)
 
-rb_tangent = Radiobutton(ratio_frame, text="Cotangent", variable=ratio_var, value="Cotangent", padx=35, pady=3, font=("Arial Rounded MT Bold", 14), fg="#7300bf")
-rb_tangent.pack(side=tk.RIGHT)
+rb_cotangent = Radiobutton(ratio_frame, text="cotangent", variable=ratio_var, value="Cotangent", padx=35, pady=3, font=("Arial Rounded MT Bold", 14), fg="#7300bf")
+rb_cotangent.pack(side=tk.RIGHT)
 
 # Create entry fields for the ratios
 # ایجاد ورودی مربوط به هر زاویه‌ی مثلثاتی
-sine_entry = tk.Entry(root, font=("Arial Rounded MT Bold", 11), bd=3, bg="#c0ecbf")
-cosine_entry = tk.Entry(root, font=("Arial Rounded MT Bold", 11), bd=3, bg="#c0ecbf")
-tangent_entry = tk.Entry(root, font=("Arial Rounded MT Bold", 11), bd=3, bg="#c0ecbf")
-Cotangent_entry = tk.Entry(root, font=("Arial Rounded MT Bold", 11), bd=3, bg="#c0ecbf")
+ans_entry = tk.Entry(root, font=("Arial Rounded MT Bold", 11), bd=3, bg="#c0ecbf")
 
-# Create labels for the entry fields
-# ایجاد عنوان برای هر ورودی 
-sine_label = tk.Label(root, text="sine:", font=("Arial Rounded MT Bold", 14), fg ="navy")
-cosine_label = tk.Label(root, text="cosine:", font=("Arial Rounded MT Bold", 14), fg ="navy")
-tangent_label = tk.Label(root, text="tangent:", font=("Arial Rounded MT Bold", 14), fg ="navy")
-Cotangent_label = tk.Label(root, text="Cotangent:", font=("Arial Rounded MT Bold", 14), fg ="navy")
+# Create label for the entry field
+# ایجاد عنوان برای ورودی پاسخ ها
+ans_label = tk.Label(root, text="", font=("Arial Rounded MT Bold", 14), fg ="navy")
 
 # Set the positions of the labels and entry fields using pack
 #مشخص کردن مکان قرار گیری ورودی و عنوان مربوط به آن 
-sine_label.pack(side=tk.TOP, padx=10, pady=5)
-sine_entry.pack(side=tk.TOP, padx=10, pady=5)
-cosine_label.pack(side=tk.TOP, padx=10, pady=5)
-cosine_entry.pack(side=tk.TOP, padx=10, pady=5)
-tangent_label.pack(side=tk.TOP, padx=10, pady=5)
-tangent_entry.pack(side=tk.TOP, padx=10, pady=5)
-Cotangent_label.pack(side=tk.TOP, padx=10, pady=5)
-Cotangent_entry.pack(side=tk.TOP, padx=10, pady=5)
+ans_label.pack(side=tk.TOP, padx=10, pady=5)
+ans_entry.pack(side=tk.TOP, padx=10, pady=5)
+
+# Hide the appropriate entry fields based on the selected ratio
+def update_labels():
+    if ratio_var.get() == "sine":
+        ans_label.config(text=":مقدار سینوس را وارد کنید", font=("B Titr", 15), fg ="navy")
+        ans_entry.pack()
+
+    elif ratio_var.get() == "cosine":
+        ans_label.config(text=":مقدار کسینوس را وارد کنید", font=("B Titr", 15), fg ="navy")
+        ans_entry.pack()
+
+    elif ratio_var.get() == "tangent":
+        ans_label.config(text=":مقدار تانژانت را وارد کنید", font=("B Titr", 15), fg ="navy")
+        ans_entry.pack()
+
+    elif ratio_var.get() == "Cotangent":
+        ans_label.config(text=":مقدار کتانژانت را وارد کنید", font=("B Titr", 15), fg ="navy")
+        ans_entry.pack()
+
+# Trace the variable for changes and call the hide_entries function
+ratio_var.trace("w", lambda *args: update_labels())
+update_labels()
+
 
 # Create a function to calculate the remaining ratios
 # ساختن تابعی برای محاسبه‌ی نسبت ها
@@ -73,13 +84,13 @@ def calculate_ratios():
     # دریافت مقدار وارد شده برای آن نسبت
     try:
         if ratio == "sine":
-            value = float(sine_entry.get())
+            value = float(ans_entry.get())
         elif ratio == "cosine":
-            value = float(cosine_entry.get())
+            value = float(ans_entry.get())
         elif ratio == "tangent":
-            value = float(tangent_entry.get())
+            value = float(ans_entry.get())
         elif ratio == "Cotangent":
-            value = float(Cotangent_entry.get())
+            value = float(ans_entry.get())
     except ValueError:
         result_label.config(text="خطا: ورودی نامعتبر", font=("B Titr", 14), pady=5, fg="#0ca2a4")
         return
@@ -124,12 +135,12 @@ def calculate_ratios():
     # نمایش جواب ها
     if ratio == "sine":
         if value == 1 or value == -1:
-            result_label.config(text=f"cosine: {cosine:.3f}, tangent: Ꝏ, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+            result_label.config(text=f"cosine: {cosine:.3f}, tangent: Ꝏ, Cotangent: 0.000", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
         else:
             result_label.config(text=f"cosine: {cosine:.3f}, tangent: {tangent:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
     elif ratio == "cosine":
         if value == 1 or value == -1:
-            result_label.config(text=f"sine: {sine:.3f}, tangent: {tangent:.3f}, Cotangent: Ꝏ", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
+            result_label.config(text=f"sine: {sine:.3f}, tangent: 0.000, Cotangent: Ꝏ", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
         else:
             result_label.config(text=f"sine: {sine:.3f}, tangent: {tangent:.3f}, Cotangent: {Cotangent:.3f}", font=("Arial Rounded MT Bold", 14), pady=10, fg="navy")
     elif ratio == "tangent":
@@ -148,50 +159,7 @@ result_label = tk.Label(root, text="")
 result_label.pack()
 
 # Pack the entry fields
-sine_entry.pack()
-cosine_entry.pack()
-tangent_entry.pack()
-
-# Hide the entry fields that are not currently selected
-# پنهان کردن ورودی‌هایی که نسبت مربوط به آن انتخاب نشده است
-def hide_entries():
-    if ratio_var.get() == "sine":
-        sine_entry.pack()
-        cosine_entry.pack_forget()
-        tangent_entry.pack_forget()
-        Cotangent_entry.pack_forget()
-        cosine_label.pack_forget()
-        tangent_label.pack_forget()
-        Cotangent_label.pack_forget()
-
-    elif ratio_var.get() == "cosine":
-        sine_entry.pack_forget()
-        cosine_entry.pack()
-        tangent_entry.pack_forget()
-        Cotangent_entry.pack_forget()
-        sine_label.pack_forget()
-        tangent_label.pack_forget()
-        Cotangent_label.pack_forget()
-
-    elif ratio_var.get() == "tangent":
-        sine_entry.pack_forget()
-        cosine_entry.pack_forget()
-        Cotangent_entry.pack_forget()
-        tangent_entry.pack()
-        sine_label.pack_forget()
-        cosine_label.pack_forget()
-        Cotangent_label.pack_forget()
-
-    elif ratio_var.get() == "Cotangent":
-        sine_entry.pack_forget()
-        cosine_entry.pack_forget()
-        tangent_entry.pack_forget()
-        Cotangent_entry.pack()
-        sine_label.pack_forget()
-        cosine_label.pack_forget()
-        tangent_label.pack_forget()
-
-ratio_var.trace("w", lambda *args: hide_entries())
+ans_entry.pack()
 
 # Start the main loop
 root.mainloop()
