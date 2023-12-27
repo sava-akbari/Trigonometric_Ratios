@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import Radiobutton
-from math import sin, cos, tan, asin, acos, atan, radians
+from math import sin, cos, tan, asin, acos, atan
 
 # Define constants  
 #تعریف مقادیر ثابت
